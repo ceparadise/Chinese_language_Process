@@ -5,9 +5,9 @@ import xml.etree.ElementTree as ET
 
 class Extract(object):
     def __init__(self):
-        self.f_loc = "/Users/zhengxx/PycharmProjects/annotate_original_data/"
-        self.appenddir = "/Users/zhengxx/PycharmProjects/xml/"
-        self.output = "/Users/zhengxx/PycharmProjects/output/"
+        self.f_loc = "C:\\liuclp\\annotate_original_data\\"
+        self.appenddir = "C:\\liuclp\\standard\\"
+        self.output = "C:\\liuclp\\standard\\output\\"
         self.f = os.listdir(self.f_loc)
 
     def load_data(self):
