@@ -6,8 +6,8 @@ import xml.etree.ElementTree as ET
 class Extract(object):
     def __init__(self):
         self.f_loc = "C:\\liuclp\\annotate_original_data\\"
-        self.appenddir = "C:\\liuclp\\standard\\"
-        self.output = "C:\\liuclp\\standard\\output\\"
+        self.appenddir = "C:\\liuclp\\comparing\\"
+        self.output = "C:\\liuclp\\comparing\\output\\"
         self.f = os.listdir(self.f_loc)
 
     def load_data(self):
@@ -27,12 +27,20 @@ class Extract(object):
                 for child in self.root:
                     t = child[0][0].attrib['participant']
                     dic[child.attrib["id"]] = t
+                    #print child.attrib["id"], t
 
                 for line in infile:
+
                     if line.startswith('suid='):
                         line = line.strip()
                         line = line + " participant=" + dic[line[5:]] + "\n"
                         file_output.write(line)
+
+                    elif line.startswith('msgid=s'):
+                        line = line.strip()
+                        line = line + " participant=" + dic[line[6:8]] + "\n"
+                        file_output.write(line)
+                   
                     else:
                         file_output.write(line)
 
