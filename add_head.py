@@ -1,4 +1,4 @@
-__author__ = 'zhengxx'
+
 import os
 
 class add_head:
