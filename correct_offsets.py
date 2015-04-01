@@ -11,8 +11,8 @@ correct the pro's offset
 class Extract(object):
     def __init__(self):
         self.f_loc = "C:\\liuclp\\annotate_original_data\\"
-        self.appenddir = "C:\\liuclp\\comparing\\output\\"
-        self.output = "C:\\liuclp\\correct_offsets\\"
+        self.appenddir = "C:\\Users\\Liu\\Desktop\\standard\\output\\"
+        self.output = "C:\\Users\\Liu\\Desktop\\standard\\correct_offsets\\"
         self.f = os.listdir(self.f_loc)
 
     def load_data(self):
