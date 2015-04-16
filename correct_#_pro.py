@@ -8,8 +8,8 @@ correct the pro's offset
 
 class Correctpro(object):
     def __init__(self):
-        self.f_loc = "C:\\Users\\Liu\\Desktop\\final_data\\"
-        self.output = "C:\\Users\\Liu\\Desktop\\final_data\\output\\"
+        self.f_loc = "C:\\Users\\Liu\\Desktop\\Working\\"
+        self.output = "C:\\Users\\Liu\\Desktop\\Working\\test_data\\"
         self.f = os.listdir(self.f_loc)
 
     def load_data(self):
@@ -22,7 +22,23 @@ class Correctpro(object):
                 for tags in self.root[1]:
                     start = int(tags.attrib["start"])
                     end = int(tags.attrib["end"])
-                    print start, end
+                    text = tags.attrib["text"]
+                    if text == "*pro*":
+                        print text
+                        tags.attrib["text"]="pro"
+
+                    if text == " *pro*":
+                        print text
+                        tags.attrib["text"]="pro"
+
+                    if text == "*pro* ":
+                        print text
+                        tags.attrib["text"]="pro"
+
+                    if text == " *pro* ":
+                        print text
+                        tags.attrib["text"]="pro"
+
                     if end-start == 5:
                         start = start+1
                         end = end-1

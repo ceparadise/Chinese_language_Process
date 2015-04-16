@@ -3,8 +3,8 @@ import os
 
 class add_head:
     def add(self):
-        input = "C:\\Users\\Liu\\Desktop\\standard\\correct_offsets\\"
-        output = "C:\\Users\\Liu\\Desktop\\standard\\correct_offsets\\final_data\\"
+        input = "C:\\Users\\Liu\\Desktop\\Working\\test_data\\"
+        output = "C:\\Users\\Liu\\Desktop\\Working\\test_data\\test\\"
         dir_f = os.listdir(input)
         for x in dir_f:
             if x.endswith('.xml'):

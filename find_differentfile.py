@@ -3,12 +3,10 @@ import os
 import xml.etree.ElementTree as ET
 import codecs
 
-
 class Comparexml(object):
     def __init__(self):
-        self.xmlfile = []
-        self.comparef_loc = "C:\\Users\\Liu\\Desktop\\Liu_Final\\"
-        self.standf_loc = "C:\\Users\\Liu\\Desktop\\Wang_Final\\"
+        self.comparef_loc = "C:\\Users\\Liu\\Desktop\\pro\\Wang_Final\\"
+        self.standf_loc = "C:\\Users\\Liu\\Desktop\\pro\\bolt\\"
         
         self.standf = os.listdir(self.standf_loc)
         self.comparef=os.listdir(self.comparef_loc)
@@ -16,11 +14,8 @@ class Comparexml(object):
 
     def load_data(self):
         for x in self.standf:
-            if x.endswith('.xml'):
-                standf_name = self.standf_loc + x
-                '''
-                standard tree 
-                '''
+            if x.endswith('.fid'):
+                x = x[:-3]+'xml'
                 if x not in self.comparef:
                     print x
                     continue
