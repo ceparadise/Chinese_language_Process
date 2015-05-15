@@ -5,17 +5,20 @@ import xml.etree.ElementTree as ET
 
 class Extract(object):
     def __init__(self):
-        self.f_loc = "C:\\liuclp\\annotate_original_data\\"
-        self.appenddir = "C:\\Users\\Liu\\Desktop\\standard\\"
-        self.output = "C:\\Users\\Liu\\Desktop\\standard\\output\\"
+        self.f_loc = "E:\\CLP\\sms_original\\"
+        self.appenddir = "E:\\CLP\\newstandard_annotation\\"
+        self.output = "E:\\CLP\\newstandard_annotation\\output\\"
         self.f = os.listdir(self.f_loc)
 
     def load_data(self):
         for x in self.f:
             if x.endswith('.xml'):
                 fname = self.f_loc + x
-                apname = self.appenddir + x
-                outputname = self.output + x
+                print fname
+                apname = self.appenddir + x[:-3]+'fid'
+                print apname
+                outputname = self.output + x[:-3]+'fid'
+                print outputname
                 if os.path.exists(apname):
                     file_output = open(outputname, 'w')
                     infile = open(apname, 'r')
