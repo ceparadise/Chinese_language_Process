@@ -7,7 +7,7 @@ import codecs
 class CompareXml(object):
     def __init__(self):
         self.xmlfile = []
-        self.comparef_loc = "E:\\CLP\\newstandard_annotation\\"
+        self.comparef_loc = "E:\\CLP\\liu_new\\"
         self.standf_loc = "E:\\CLP\\wang_new\\"
         self.output = "E:\\CLP\\result.txt"
         self.standf = os.listdir(self.standf_loc)
@@ -41,6 +41,8 @@ class CompareXml(object):
                 for tags in self.root[1]:
                     start = int(tags.attrib["start"])
                     pron = tags.tag
+                    if pron=='other':
+                        continue
                     generic = str(tags.attrib["generic"])
                     refer = str(tags.attrib["referential"])
                     event = str(tags.attrib["event"])
@@ -64,33 +66,35 @@ class CompareXml(object):
                 #ctext = self.croot[0].text
                 for tags in self.croot[1]:
                     '''all the tags in compare tree'''
-                    cstart = int(tags.attrib["start"])
-                    cgeneric = str(tags.attrib["generic"])
-                    crefer = str(tags.attrib["referential"])
-                    cevent = str(tags.attrib["event"])
-                    cpre = str(tags.attrib["pre_utter"])
-                    cple = str(tags.attrib["pleonastic"])
-                    cexi = str(tags.attrib["existential"])
                     cpron = tags.tag
+                    cstart = int(tags.attrib["start"])
+                    if cpron!='other':
+                        cgeneric = str(tags.attrib["generic"])
+                        crefer = str(tags.attrib["referential"])
+                        cevent = str(tags.attrib["event"])
+                        cpre = str(tags.attrib["pre_utter"])
+                        cple = str(tags.attrib["pleonastic"])
+                        cexi = str(tags.attrib["existential"])
+
                     if dic_pron_tag.has_key(cstart):
                         if cpron != dic_pron_tag[cstart]:
                             right_pro=dic_pron_tag[cstart]
                             self.error_count[right_pro]=self.error_count.get(right_pro,0)+1
                             #print self.locate(cstart),'compare: ',cpron, 'standard: ',dic_pron_tag[cstart]
-                            self.result.write(self.locate(cstart)+'\t compare: '+cpron+'\t standard: '+dic_pron_tag[cstart]+'\n')
+                            self.result.write(x+'\n'+self.locate(cstart)+'\t Liu: '+cpron+'\t Wang: '+dic_pron_tag[cstart]+'\n\n')
                         if cpron == dic_pron_tag[cstart]:
                             if cgeneric != dic_generic_tag[cstart]:
-                                self.result.write(self.locate(cstart)+'\t\t'+cpron+'\t generic compare:'+'\t'+cgeneric+'\t standard: '+dic_generic_tag[cstart]+'\n')
+                                self.result.write(x+'\n'+self.locate(cstart)+'\t\t'+cpron+'\t generic Liu:'+'\t'+cgeneric+'\t Wang: '+dic_generic_tag[cstart]+'\n\n')
                             if crefer != dic_refer_tag[cstart]:
-                                self.result.write(self.locate(cstart)+'\t\t'+cpron+'\t refer compare:'+'\t'+crefer+'\t standard: '+dic_refer_tag[cstart]+'\n')
+                                self.result.write(x+'\n'+self.locate(cstart)+'\t\t'+cpron+'\t refer Liu:'+'\t'+crefer+'\t Wang: '+dic_refer_tag[cstart]+'\n\n')
                             if cevent != dic_event_tag[cstart]:
-                                self.result.write(self.locate(cstart)+'\t\t'+cpron+'\t event compare:'+'\t'+cevent+'\t standard: '+dic_event_tag[cstart]+'\n')
+                                self.result.write(x+'\n'+self.locate(cstart)+'\t\t'+cpron+'\t event Liu:'+'\t'+cevent+'\t Wang: '+dic_event_tag[cstart]+'\n\n')
                             if cpre != dic_pre_tag[cstart]:
-                                self.result.write(self.locate(cstart)+'\t\t'+cpron+'\t pre_utterance compare:'+'\t'+cpre+'\t standard: '+dic_pre_tag[cstart]+'\n')
+                                self.result.write(x+'\n'+self.locate(cstart)+'\t\t'+cpron+'\t pre_utterance Liu:'+'\t'+cpre+'\t Wang: '+dic_pre_tag[cstart]+'\n\n')
                             if cple != dic_ple_tag[cstart]:
-                                self.result.write(self.locate(cstart)+'\t\t'+cpron+'\t pleonastic compare:'+'\t'+cple+'\t standard: '+dic_ple_tag[cstart]+'\n')
+                                self.result.write(x+'\n'+self.locate(cstart)+'\t\t'+cpron+'\t pleonastic Liu:'+'\t'+cple+'\t Wang: '+dic_ple_tag[cstart]+'\n\n')
                             if cexi != dic_exi_tag[cstart]:
-                                self.result.write(self.locate(cstart)+'\t\t'+cpron+'\t existential compare:'+'\t'+cexi+'\t standard: '+dic_exi_tag[cstart]+'\n')
+                                self.result.write(x+'\n'+self.locate(cstart)+'\t\t'+cpron+'\t existential Liu:'+'\t'+cexi+'\t Wang: '+dic_exi_tag[cstart]+'\n\n')
                     else:
                         print "mismatch"
                         print 'compare:',cpron,cstart,'filename=',x
@@ -117,7 +121,7 @@ class CompareXml(object):
             if start < off:
 
                 #self.result.write( self.text[offsetid[i-1]+1:offsetid[i]])
-                return self.text[offsetid[i-1]+1:offsetid[i]]
+                return self.text[offsetid[i-4]+1:offsetid[i]]
                 #print self.text[offsetid[i-1]+1:offsetid[i]],
                 #return sentid
             else:
@@ -130,13 +134,3 @@ if __name__ =="__main__":
     e.load_data()
     e.calculation()
     print 'finish'
-
-
-
-
-
-
-
-
-
-
